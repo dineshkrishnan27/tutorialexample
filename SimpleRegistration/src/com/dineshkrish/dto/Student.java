@@ -2,6 +2,12 @@ package com.dineshkrish.dto;
 
 import java.sql.Date;
 
+/**
+ * 
+ * @author Dinesh Krishnan
+ *
+ */
+
 public class Student {
 
 	private String firstName;

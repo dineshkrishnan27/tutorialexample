@@ -7,17 +7,23 @@ import java.sql.SQLException;
 import com.dineshkrish.db.ConnectionProvider;
 import com.dineshkrish.dto.Student;
 
-public class StudentDAO {
+/**
+ * 
+ * @author Dinesh Krishnan
+ *
+ */
 
+public class StudentDAO {
 	
 	public boolean add(Student student) {
 		
+		// Getting Connection Object
 		Connection connection = ConnectionProvider.getConnection();
 		
 		try {
 			
-			PreparedStatement ps = connection.prepareStatement("insert into student_details(firstName, lastName, "
-					+ "age, emailId, dob, contactNumber, qualification, address) values (?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO student_details(firstName, lastName, "
+					+ "age, emailId, dob, contactNumber, qualification, address) VALUES (?,?,?,?,?,?,?,?)");
 			
 			ps.setString(1, student.getFirstName());
 			ps.setString(2, student.getSecondName());
@@ -28,6 +34,7 @@ public class StudentDAO {
 			ps.setString(7, student.getQualification());
 			ps.setString(8, student.getAddress());
 			
+			// It will return 1 if its Inserted successfully..
 			if(ps.executeUpdate() > 0) {
 				
 				return true;
@@ -35,6 +42,7 @@ public class StudentDAO {
 			
 		} catch (SQLException e) {
 			
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		
