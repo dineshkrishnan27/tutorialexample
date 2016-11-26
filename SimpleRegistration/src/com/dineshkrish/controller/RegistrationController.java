@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.dineshkrish.bo.StudentService;
 import com.dineshkrish.dto.Student;
 
+/**
+ * 
+ * @author Dinesh Krishnan
+ *
+ */
+
 public class RegistrationController extends HttpServlet {
 
 	private String firstName;
@@ -29,8 +35,10 @@ public class RegistrationController extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		// Defining Student Service Object
 		StudentService service = new StudentService();
 		
+		// Getting all Parameter value from HTML form
 		firstName = req.getParameter("firstName");
 		secondName = req.getParameter("secondName");
 		age = Integer.parseInt(req.getParameter("age"));
@@ -40,6 +48,7 @@ public class RegistrationController extends HttpServlet {
 		qualification = req.getParameter("qualification");
 		address = req.getParameter("address");
 		
+		// Defining Student Object
 		Student student = new Student();
 		
 		student.setFirstName(firstName);
@@ -53,20 +62,23 @@ public class RegistrationController extends HttpServlet {
 		
 		if(service.addStudent(student)) {
 			
+			// Dispatching Success Page
 			RequestDispatcher dispatcher = req.getRequestDispatcher("success.jsp");
 			dispatcher.forward(req, resp);
 			
 		} else {
 			
+			// Dispatching Error Page
 			RequestDispatcher dispatcher = req.getRequestDispatcher("error.jsp");
 			dispatcher.forward(req, resp);
 			
 		}
 	}
 	
+	// Method to Convert String java.sql.Date Object
 	private Date convertStringToDate(String strDate) {
 		
-		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		
 		java.util.Date d = null;
 		
@@ -83,23 +95,3 @@ public class RegistrationController extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
